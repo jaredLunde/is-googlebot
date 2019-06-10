@@ -15,6 +15,6 @@ or
 ```python
 import is_googlebot
 
-is_googlebot.test(ip_address, user_agent)
+is_googlebot.test(ip_address, user_agent)  # user_agent is optional, an IP alone can be tested
 # True if this is Googlebot
 ```
