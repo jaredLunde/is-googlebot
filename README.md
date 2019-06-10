@@ -6,6 +6,7 @@ quickly bailout. If it does match, it will check the DNS hostname of the
 IP against known Googlebot hostnames. If it isn't spoofed, it will return
 `True`. This is the only way to safely test whether or not a given bot is 
 actually Googlebot.
+
 ## Installation
 `poetry add is-googlebot`
 or
