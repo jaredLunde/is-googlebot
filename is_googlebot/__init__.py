@@ -1,11 +1,10 @@
 import re
 import socket
-import user_agents
 from functools import lru_cache
 
 
-__all__ = 'is_googlebot', 'gethostbyaddr', 'gethostbyname', 'test',
-googlebot_re = re.compile(r'''(^|\b)(google|googlebot)($|\b)''', re.I)
+# __all__ = 'is_googlebot', 'gethostbyaddr', 'gethostbyname', 'test',
+GOOGLEBOT_RE = re.compile(r'''\b(google|googlebot)\b''', re.I)
 GOOGLEBOT_DOMAINS = {'googlebot', 'google'}
 
 
@@ -22,10 +21,8 @@ def gethostbyname(hostname):
     return socket.gethostbyname(hostname)
 
 
-def is_googlebot(ip_address, user_agent):
-    ua = user_agents.parse(user_agent)
-
-    if ua.is_bot is False or not googlebot_re.search(ua.browser.family):
+def is_googlebot(ip_address, user_agent=None):
+    if user_agent is not None and not GOOGLEBOT_RE.search(user_agent):
         return False
 
     host = gethostbyaddr(ip_address)
@@ -33,14 +30,13 @@ def is_googlebot(ip_address, user_agent):
         return False
 
     host_parts = host.split('.')
-
     try:
         if host_parts[-1] != 'com' or host_parts[-2] not in GOOGLEBOT_DOMAINS:
             return False
     except IndexErro:
         return False
 
-    return gethostbyname(host) == ip
+    return gethostbyname(host) == ip_address
 
 
 test = is_googlebot
