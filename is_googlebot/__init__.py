@@ -33,7 +33,7 @@ def is_googlebot(ip_address, user_agent=None):
     try:
         if host_parts[-1] != 'com' or host_parts[-2] not in GOOGLEBOT_DOMAINS:
             return False
-    except IndexErro:
+    except IndexError:
         return False
 
     return gethostbyname(host) == ip_address

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "is-googlebot"
-version = "0.1.1"
+version = "0.1.2"
 description = ""
 authors = ["Jared Lunde <jared.lunde@gmail.com>"]
 
